@@ -18,20 +18,18 @@ import com.movilitas.sync.SyncConstants;
 
 public class Demo
 {
-    private static String DEVICE_ADDRESS = "";
-
+    private static String DEVICE_ADDRESS = "@jibin.ou@honeywell.com";
+    private static String MOVELET_KEY    = "MyMoveletKey.Jibin";
     public static void main(final String... args) throws Exception
     {
         final MovilizerWS ws = new MovilizerWS();
-
-        createMovelet(ws);
         deleteMovelet(ws);
+        createMovelet(ws);
         createMasterdata(ws);
     }
 
     private static MovilizerResponse createMovelet(final MovilizerWS ws) throws Exception
     {
-
         final MovilizerRequest movilizerRequest = new MovilizerRequest();
         movilizerRequest.setSynchronousResponse(true);
         movilizerRequest.setNumResponses(new Integer(100));
@@ -41,7 +39,7 @@ public class Demo
         final MoveletType moveletType = MoveletType.SINGLE;
 
         final MovilizerMovelet movelet = new MovilizerMovelet();
-        movelet.setMoveletKey("MyMoveletKey");
+        movelet.setMoveletKey(MOVELET_KEY);
         movelet.setMoveletType(moveletType);
         movelet.setName("MyMovelet");
         movelet.setInitialQuestionKey("Q1");
@@ -60,7 +58,7 @@ public class Demo
 
         final MovilizerParticipant participant = new MovilizerParticipant();
         participant.setDeviceAddress(DEVICE_ADDRESS);
-        participant.setParticipantKey("");
+        participant.setParticipantKey(DEVICE_ADDRESS);
         participant.setName("test");
 
         moveletSet.addMovelet(movelet);
@@ -77,7 +75,7 @@ public class Demo
         movilizerRequest.setNumResponses(new Integer(100));
 
         final MovilizerMoveletDelete moveletDelete = new MovilizerMoveletDelete();
-        moveletDelete.setMoveletKey("MyMoveletKey");
+        moveletDelete.setMoveletKey(MOVELET_KEY);
 
         movilizerRequest.addMoveletDelete(moveletDelete);
 
